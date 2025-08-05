@@ -4,15 +4,16 @@ before_script:
   - pip install --upgrade pip
   - pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin
 
-test:
-  stage: test
+build-docs:
+  stage: build
   script:
-  - mkdocs build --strict --verbose --site-dir test
+    - mkdocs build --strict
   artifacts:
     paths:
-    - test
-  rules:
-    - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
+      - site
+    expire_in: 1 week
+  only:
+    - main
 
 pages:
   stage: deploy
@@ -21,5 +22,6 @@ pages:
   artifacts:
     paths:
     - public
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  only:
+      - main
+

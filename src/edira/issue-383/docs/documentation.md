@@ -1,5 +1,5 @@
 # 383
 
-[Git Issue 383](https://git.etes.de/edira/edira/-/issues/383)
+[Git Issue 383](https://work-documentation.jroedel-work.gitlab.io/)
 
 ## Breakdown 

@@ -1,33 +1,16 @@
-image: python:latest
-
-stages:
-  - build
-  - deploy
-
-variables:
-  MKDOCS_OUTPUT_DIR: 'site'
-  GITLAB_PAGES_BRANCH: 'pages'
-
-before_script:
-  - pip install --upgrade pip
-  - pip install --upgrade mkdocs mkdocs-material mkdocs-awesome-pages-plugin
-
-build_documentation:
-  stage: build
+pages:
+  stage: deploy
+  image: python:latest
   script:
-    - mkdocs build --strict
+    - pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin
+    - mkdocs build --site-dir public
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - ~/.cache/ 
   artifacts:
     paths:
-      - $MKDOCS_OUTPUT_DIR/
+      - public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
-deploy_to_pages:
-  stage: deploy
-  dependencies:
-    - build_documentation
-  script:
-    - git checkout -b $GITLAB_PAGES_BRANCH || echo "Branch already exists"
-    - cp -R $MKDOCS_OUTPUT_DIR/* .
-    - git add --all && git commit -m "Update MkDocs documentation" || echo "No changes to commit"
-    - git push origin $GITLAB_PAGES_BRANCH
-  only:
-    - main  # Adjust this to your desired branch(es)

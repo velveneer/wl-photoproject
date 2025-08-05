@@ -1,6 +1,6 @@
 # Work Documentation Johannes Rödel
 
-This repository contains the documentation for all my work I did at ETES. 
+This website contains the documentation for all my work I did at ETES. 
 
 Right now it's split between:
 
@@ -9,15 +9,20 @@ Right now it's split between:
 - `Setup`: documentation for the setups that are used in the company
 
 The provided documentation is a MkDocs Collection that is hosted in a GitLab repository with a CI/CD pipeline as a GitLab Page to offer a better GUI.
+
+!!! Info
+    Open the side panel menu to quickly navigate between the exercises.
+
 ---
 
-# **[Link GitLab Hosted Documentation](https://sdi-documentation-g11-jr125-153490.pages.mi.hdm-stuttgart.de/)**
+# **[Link GitLab Source Repository](https://git.etes.de/jroedel-work/work-documentation.git)**
 
 Open the side panel menu to quickly navigate between the exercises. The documentation supports a search function to quickly search for specific words.
 
 If you want to run it locally on your machine follow the instructions down below. 
 
 ## Project Structure 
+
 ```
 .
 ├── src/                        # All documentation files

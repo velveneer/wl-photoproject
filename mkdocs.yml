@@ -1,0 +1,47 @@
+site_name: JR-ETES-Documentation
+
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - yaml
+    - rust
+  admonition:
+      <type>: <icon>
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+plugins:
+  - search
+  - awesome-pages
+
+docs_dir: src
+
+nav:
+  - Home: index.md
+  - Edira:
+    - Issues:
+      - 336 SOA Version Update: edira/issue-336/docs/02_documentation.md
+      - 338 Admin Advanced Search Filter: edira/issue-338/docs/documentation.md
+      - 383 VVT Overview Content Preview: edira/issue-383/docs/documentation.md
+  - Setup:
+    - Edira Development Setup: setup/edira-dev-env/docs/documentation.md
+    - Edira Git Guide: setup/git/docs/documentation.md
+  - Education:
+    - ETES Internal Courses:
+      - BD01: education/etes-edu/BD01/docs/documentation.md
+    - Laracast:
+      - Git: education/laracast/git/docs/documentation.md
+      - Laravel: education/laracast/laravel/docs/documentation.md
+      - Livewire: education/laracast/livewire/docs/documentation.md
+      - PHP: education/laracast/php/docs/documentation.md

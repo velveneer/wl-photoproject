@@ -18,6 +18,7 @@ Open the side panel menu to quickly navigate between the exercises. The document
 If you want to run it locally on your machine follow the instructions down below. 
 
 ## Project Structure 
+
 ```
 .
 ├── src/                        # All documentation files
@@ -26,7 +27,10 @@ If you want to run it locally on your machine follow the instructions down below
 │   │   │   ├── docs/           # .md documentation files
 │   │   │   └── src             # Other files
 │   │   ├── .../                # Additional setup guides
-│   ├── edira/                  # Issues I've worked on for Edira
+│   ├── edira/                  # Documentation for Edira and Issues
+│   │   ├── project-breakdown/  # Explanations like folder structure, laraval/livewire features, etc.
+│   │   │   ├── docs/           # .md documentation files
+│   │   │   └── src             # Other files
 │   │   ├── issue-XY/           # Specific issue
 │   │   │   ├── docs/           # .md documentation files
 │   │   │   └── src             # Other files

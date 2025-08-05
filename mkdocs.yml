@@ -30,6 +30,8 @@ docs_dir: src
 nav:
   - Home: index.md
   - Edira:
+    - Breakdowns:
+      - Directory Structure & Responsibilties: edira/project-breakdown/docs/structure.md
     - Issues:
       - 336 SOA Version Update: edira/issue-336/docs/02_documentation.md
       - 338 Admin Advanced Search Filter: edira/issue-338/docs/documentation.md

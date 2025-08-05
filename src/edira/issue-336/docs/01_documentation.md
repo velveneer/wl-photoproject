@@ -12,49 +12,49 @@ Wenn ein initialer SOA angelegt wird, ist in dem generierten PDF Dokument auf Se
 
 Initiale SOA-Version anlegen:
 
-![image info](./img/1.png)
+![image info](../src/img/01/1.png)
 
-![image info](./img/2.png)
+![image info](../src/img/01/2.png)
 
-![image info](./img/3.png)
+![image info](../src/img/01/3.png)
 
 ---
 
 PDF Änderungs-Historie mit Default-Werten, da noch keine Änderung vorgenommen wurde:
 
-![image info](./img/4.png)
+![image info](../src/img/01/4.png)
 
 ---
 
 `soa_version` table in Datenbank nachdem initiale SOA Version angelegt wurde:
 
-![image info](./img/5.png)
+![image info](../src/img/01/5.png)
 
 ---
 
 `soa_changelogs` table in Datenbank nachdem initiale SOA Version angelegt wurde:
 
-![image info](./img/6.png)
+![image info](../src/img/01/6.png)
 
 --- 
 
 erste Änderung der initialen Version:
 
-![image info](./img/7.png)
+![image info](../src/img/01/7.png)
 
-![image info](./img/8.png)
+![image info](../src/img/01/8.png)
 
 ---
 
 PDF Änderungs-Historie mit Default-Werten, nachdem Änderung vorgenommen wurde:
 
-![image info](./img/9.png)
+![image info](../src/img/01/9.png)
 
 ---
 
 `soa_changelogs` table in Datenbank nach erster Änderung an initiale SOA Version:
 
-![image info](./img/10.png)
+![image info](../src/img/01/10.png)
 
 ### Solution 
 
@@ -70,31 +70,31 @@ Wenn eine initiale SOA Version erstellt wurde, kann über das Dropdown Menu `Ver
 
 Neue SOA-Version nach initial SOA-Version anlegen:
 
-![image info](./img/11.png)
+![image info](../src/img/01/11.png)
 
 ---
 
 Neue SOA-Version und Initialversion verfügbar nach Anlegen:
 
-![image info](./img/12.png)
+![image info](../src/img/01/12.png)
 
 ---
 
 Änderungsprotokoll nach Erstellung, ohne dass eine Änderung vorgenommen wurde:
 
-![image info](./img/13.png)
+![image info](../src/img/01/13.png)
 
 ---
 
 Druckbare Datei nach Erstellung, ohne dass eine Änderung vorgenommen wurde:
 
-![image info](./img/14.png)
+![image info](../src/img/01/14.png)
 
 --- 
 
 `soa_changelogs` table in Datenbank nach Anlege von neuer SOA-Version , ohne dass eine Änderung vorgenommen wurde:
 
-![image info](./img/15.png)
+![image info](../src/img/01/15.png)
 
 ---
 
@@ -156,13 +156,13 @@ Für den User ist es meiner Meinung nach verwirrend, dass sowohl für die SOA-Ve
 
 Button um neue SOA-Version zu erstellen und Änderungsprotokoll-Button:
 
-![image info](./img/16.png)
+![image info](../src/img/01/16.png)
 
 ---
 
 Form / Button um neue Änderungsversion einer SOA-Version zu erstellen:
 
-![image info](./img/17.png)
+![image info](../src/img/01/17.png)
 
 ### Solution
 

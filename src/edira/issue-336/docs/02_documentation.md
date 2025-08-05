@@ -8,11 +8,11 @@
 
 Wenn ein initialer SOA angelegt wird, ist in dem generierten PDF Dokument auf Seite 2 unter der Änderungs-Historie die Tabelle mit Default-Werten gefüllt. Hier kam die Frage auf, ob diese Seite erst ab der ersten Änderung generiert werden soll. Gewünscht ist zunächst, die Tabelle wie im NIS Bereich mit leeren Strichen zu füllen
 
-![image info](../src/img/1.png)
+![image info](../src/img/02/1.png)
 
 Zudem soll im Dashboard unter Änderungsprotokoll neben der Versionsnummer ein Versionsname hinzugefügt werden können. Dies soll zunächst nur in der GUI und nicht in der Änderungshistorie des .pdf Dokuments wiedergespiegelt werden.
 
-![image info](../src/img/2.png)
+![image info](../src/img/02/2.png)
 
 ### Solution 
 

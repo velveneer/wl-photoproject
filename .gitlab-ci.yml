@@ -1,16 +1,38 @@
-pages:
-  stage: deploy
-  image: python:latest
+image: python:3.10
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - .cache/pip
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+before_script:
+  - pip install --upgrade pip
+  - pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin
+
+build-docs:
+  stage: build
   script:
-    - pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin
-    - mkdocs build --site-dir public
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - ~/.cache/ 
+    - mkdocs build --strict --verbose
   artifacts:
     paths:
-      - public
-  rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      - site
+    expire_in: 1 week
+  only:
+    - main
+
+pages:
+  stage: deploy
+  script:
+    - mkdocs build --strict --verbose
+  artifacts:
+    paths:
+    - public
+  only:
+      - main
 

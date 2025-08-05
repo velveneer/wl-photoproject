@@ -11,7 +11,7 @@ Right now it's split between:
 The provided documentation is a MkDocs Collection that is hosted in a GitLab repository with a CI/CD pipeline as a GitLab Page to offer a better GUI.
 ---
 
-# **[Link GitLab Hosted Documentation](https://sdi-documentation-g11-jr125-153490.pages.mi.hdm-stuttgart.de/)**
+# **[Link GitLab Hosted Documentation](https://git.etes.de/jroedel-work/work-documentation.gitlab.io)**
 
 Open the side panel menu to quickly navigate between the exercises. The documentation supports a search function to quickly search for specific words.
 

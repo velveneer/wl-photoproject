@@ -1,0 +1,38 @@
+image: python:3.10
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - .cache/pip
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+before_script:
+  - pip install --upgrade pip
+  - pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin
+
+build-docs:
+  stage: build
+  script:
+    - mkdocs build --strict --verbose
+  artifacts:
+    paths:
+      - site
+    expire_in: 1 week
+  only:
+    - main
+
+pages:
+  stage: deploy
+  script:
+    - mkdocs build --strict --verbose
+  artifacts:
+    paths:
+    - public
+  only:
+      - main
+

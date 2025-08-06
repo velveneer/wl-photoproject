@@ -26,33 +26,22 @@ Auf der Übersichtsseite eines spezifischens VVT sind nur die generischen Übers
 ```
 .
 ├── app/
-│   ├── Http/                  
-│   │   ├── Livewire/
-│   │   │   ├── Vvt/
-│   │   │   │   └── View.php  
-├── resources/
-│   ├── views/                  
-│   │   ├── livewire/
-│   │   │   ├── vvt/
-│   │   │   │   └── view.blade.php  
-
+│   └── Http/                  
+│       └── Livewire/
+│           └── Vvt/
+│               └── View.php  
+└── resources/
+    └── views/                  
+        └── livewire/
+            └── vvt/
+                └── view.blade.php  
 ```
-
-
-
 
 ## Solution
 
-1. Component:
+### Component
 
-- vvt objekt wird bereits in Livewire Component created 
-- datenbank einträge aus table 'vvt_values' ist verfügbar zu jeweiligen vvt:
-- diese enthalten row_id, welches auf die zugehörige vvt row verweist
-
-`$this -> vvt -> values`
-
-- aktuell wird nur rows object an view weitergegeben, welches nur information über die aktuell dargestellten rows besitzt 
-- values von vvt als eigenes array an view weitergeben:
+Im Component für die Übersich des spezifischen VVT, wird bereits ein `$vvt` Objekt erstellt, in dem Daten aus den Tables `vvt_rows` und `vvt_values` gespeichert wird. Aktuell werden schon die Daten aus dem `vvt_rows` table als Array an die View weitergegeben. Damit die User generierten Beiträge für jede Row mit angezeigt werden können, müssen die Daten aus dem `vvt_values` table ebenfalls als Array mit an die View übergeben werden:
 
 ```php
 public function render(): \Illuminate\Contracts\View\View
@@ -61,28 +50,82 @@ public function render(): \Illuminate\Contracts\View\View
         ->layout('layouts.app', ['title' => 'VVT Bearbeiten']);
 }
 ```
+!!!Note
+    In der `render()` Funktion werden die relevanten Teile übergeben
 
-2. View:
+    ```php
+    ['values' => $this -> vvt -> values]
+    ```
+    Ist dabei speziell für die Daten aus `vvt_values` zuständig.
 
-- aktuell gibt es for each schleife die durch row array loopt und für jeden eintrag ein html element einfügt 
-- dabei muss gecheckt werden, ob das jeweilige row element einen bereits bestehenden eintrag besitzt und anschließened dargestellt werden:
+### View
+
+In der View muss für jedes Element des `$rows` Array ein Element erstellt werden. Dabei muss geprüft werden, ob es für diese Row zugewiesene Elemente aus `$values` gibt. Falls dies zutrifft, muss das HTML-Element um eine weitere Row erweitert werden, welche die User-Einträge beinhaltet.
 
 ```php
+{{-- creates row element for every row --}}
 @foreach ($rows as $row)
-    <a href="{{ route('dsms.vvt.rows.edit', [$vvt, $row]) }}" class="flex divide-x hover:bg-gray-100">
-        <p class="flex w-20 items-center justify-center py-4 font-mono font-semibold">{{ $row->number }}</p>
 
-        <h2 class="px-6 py-4">{{ $row->name }}</h2>
-    </a>
+    // <a> element is the parent for static content from `vvt_rows` and dynamic content from `vvt_values`
+    // <a> element needs group class so the hover effect works for all child elements
+    <a href="{{ route('dsms.vvt.rows.edit', [$vvt, $row]) }}" class="group group-hover:bg-gray-100 ">
 
-    @foreach ($values as $value)
-        @if ($value->row_id === $row->id)
-            <div class="pl-16">
-                {{ $value->body }}
+        // this div displays the content from the `vvt_rows table`
+        // `grid-cols-12` defines the amount of divided parts of the row
+        // group hover class is needed so the hover effect works 
+        <div class="grid grid-cols-12 group-hover:bg-gray-100 border-l border-r border-t divide-x">
+
+            // `col-span-1 defines the width part of p element in the row element`
+            <p class="col-span-1 items-center justify-center px-6 py-4 font-mono font-semibold">
+                {{ $row->number }}
+            </p>
+
+            // `col-span-11 defines the width part of h2 element in the row element`
+            <h2 class="col-span-11 px-6 py-4">
+                {{ $row->name }}
+            </h2>
+        </div>
+
+        // this parent div only gets created if there is one or multiple assigned values for the row form the 'vvt_values' table 
+        // if condition checkes if there is an `row_id` value for the row
+        @if ($values->where('row_id', $row->id)->isNotEmpty())
+
+            // `grid-cols-12` defines the amount of divided parts of the row 
+            // group hover class is needed so the hover effect works
+            <div class="grid grid-cols-12 group-hover:bg-gray-100 border-l border-r">
+
+                // this empty div is needed to create the same y-space as the <p> element above
+                // `col-span-1 defines the width part of p element in the row element`
+                <div class="col-span-1 px-6 py-4"></div>
+
+                // `col-span-11 defines the width part of h2 element in the row element`
+                <div class="col-span-11 border-l border-solid">
+                    <ul class=" px-6 py-4 border-t-2 border-dashed list-disc list-inside">
+                        
+                        // checks if there are multiple elements in values assigned to the row 
+                        @foreach ($values as $value)
+                            @if ($value->row_id === $row->id)
+                                <li class="text-sm">{{ $value->body }}</li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         @endif
-    @endforeach
-@endforeach
+    </a>
+@endforeach    
 ```
-## Problems
 
+## Result
+
+![image info](../src/img/4.png)
+
+!!! Note
+    VVT Übersicht ohne User-Content.
+
+![image info](../src/img/5.png)
+
+!!! Note
+    VVT Übersicht mit User-Content.
+    
+    Es wird mit einer dashed Line zwischen Headline und User-Content getrennt

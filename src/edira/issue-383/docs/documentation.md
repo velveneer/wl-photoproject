@@ -21,7 +21,7 @@ Auf der Übersichtsseite eines spezifischens VVT sind nur die generischen Übers
 !!! Info
     Wie der Inhalt platziert werden soll.
 
-## Related Files
+## Modified Files
 
 ```
 .
@@ -98,6 +98,7 @@ In der View muss für jedes Element des `$rows` Array ein Element erstellt werde
                 // `col-span-1 defines the width part of p element in the row element`
                 <div class="col-span-1 px-6 py-4"></div>
 
+                // this div is needed to make dividing border in the row solid 
                 // `col-span-11 defines the width part of h2 element in the row element`
                 <div class="col-span-11 border-l border-solid">
                     <ul class=" px-6 py-4 border-t-2 border-dashed list-disc list-inside">
@@ -128,4 +129,4 @@ In der View muss für jedes Element des `$rows` Array ein Element erstellt werde
 !!! Note
     VVT Übersicht mit User-Content.
     
-    Es wird mit einer dashed Line zwischen Headline und User-Content getrennt
+    Es wird mit einer dashed Line zwischen Headline und User-Content getrennt.

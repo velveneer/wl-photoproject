@@ -10,7 +10,6 @@
 - Anstatt `Verantwortlicher` -> `Unternehmen`
 - Aktuelle Stammdaten Unterreiter sollen alles auf einer Page sein
 - Aktuell wird alles in Table `master_records` gespeichert, die einzelnen Punkte sollen in jeweilige Tables aufgesplittet werden
-- 
 
 ![Firmeninformationen mergen](../src/img/1.png)
 
@@ -33,6 +32,43 @@
 ```
 
 ### Solution
+
+- Main Page mit Nav `company.blade.php`
+- jewilige Subpage wird über dieses tag eingebunden:
+
+```php
+<div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
+    {{ $slot }}
+</div>
+```
+- in `$slot` variable steckt jeweilige form/page
+- In router wird mit der Middelware auf der base `/` route für company der Livewire Component Information mitgegeben welcher in der View und `$slot` eingefügt wird:
+  
+```php
+Route::middleware(['role:manager'])->prefix('company')->name('company.')->group(function () {
+    Route::get('/', App\Http\Livewire\Company\Information::class)->name('information');
+}
+```
+
+- neue route für master-records-combined zu company prefix hinzufügen und zu `/` route machen
+- `/informations` route aus master records prefix entfernen und als normale company prefiy route
+- 
+- neuen livewire component für master-records-combined erstellen
+- neue view für master-records-combined
+
+
+- `Information.php` in `Verantwortlichkeiten` reinmergen
+- Logo Upload in Verantwortlichkeiten View reinmergen
+- Main Nav Link zu Firmeneinstellung von Informations zu Master Records
+- Alte Master Record Nav Elemente aus `company.view.php` rausnehmen und neue Master Records Main Page verlinken
+  
+- in view können bereits erstellte views für einzelne punkte mit @livewire alle auf einer page eingebunden werden
+- collapsible für jeden Unterpunkt erstellen 
+- Dropdown Button einfügen, Titel in Header Slot einfügen 
+- Livewire in Content Slot einfügen
+- paddings und margins anpassen für optik
+- 
+
 
 ### Result
 
@@ -175,7 +211,7 @@ Hier ist noch Rücksprache für das Verhalten erforderlich:
 ### Breakdown
 
 - Reiter Vertraulichkeitsstufen für VVT
-
+- `company.blade.php` translation in der Navbar
 
 ### Modified Files
 

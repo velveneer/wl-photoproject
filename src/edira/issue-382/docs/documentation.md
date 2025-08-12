@@ -187,3 +187,7 @@ In der View `view.blade.php` wird mit dieser Funktion geprüft, ob die Kapitelnu
 !!! Info 
     - Hauptkapitel wurden hervorgehoben
     - Unterkapitel gleich groß aber nicht bold
+
+
+
+- 6. und 10. muss noch geskippt werden

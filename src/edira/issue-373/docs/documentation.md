@@ -2,18 +2,79 @@
 
 [Git Issue 373](https://git.etes.de/edira/edira/-/issues/373)
 
+In diesem Issue werden weitreichenden Änderungen für die `Firmen-Einstellungen` vorgenommen. In dieser Dokumentation sind die Tasks in die Einzelnen Bereiche der `Firmen-Einstellungen` unterteilt:
+
+1. Stammdaten
+2. Schadenswerte
+3. Eintrittswahrscheinlichkeiten
+4. Benutzer
+5. Mitarbeiter 
+6. Abteilungen
+
 ## Task 1 Stammdaten
 
 ### Breakdown
 
-- Reiter Firmeninformationen in Reiter Stammdaten integrieren
-- Anstatt `Verantwortlicher` -> `Unternehmen`
-- Aktuelle Stammdaten Unterreiter sollen alles auf einer Page sein
-- Aktuell wird alles in Table `master_records` gespeichert, die einzelnen Punkte sollen in jeweilige Tables aufgesplittet werden
+Aktuell werden die `Stammdaten` Informationen in den `Firmen Einstellungen` in verschiedene Unterkategorien aufgeteilt und als einzelne Seiten zur Verfügung gestellt. Da die einzelnen Einstellungen keinen großen Umfang haben, sollen sie auf einer Stammdaten Seite zusammengefasst und schneller abrufbar gemacht werden. 
 
-![Firmeninformationen mergen](../src/img/1.png)
+Zudem soll die aktuell vorhandene Kategorie `Firmeninformationen` mit der Unterkategorie `Verantwortlicher` zusammengefasst werden, da hier die gleichen Informationen bearbeitet werden können und dementsprechend redundant sind. Die neue Navigationsleiste soll so strukturiert werden:
+
+```
+Stammdaten
+2FA
+Sprache
+---
+Schadenswerte
+Eintrittswahrscheinlichkeiten
+---
+User
+Mitarbeiter
+Abteilungen
+```
+
+![Redundante Einstellungen](../src/img/1.png)
+
+Im gleichen Zug soll die Datenbank angepasst werden. Aktuell werden alle Stammdaten Informationen im Table `master_records` in zwei Columns umständlich gespeichert.
 
 ![Aktueller master_records table](../src/img/2.png)
+
+Hier soll für jede Unterkategorie einen eigenenr Table angelegt werden:
+
+`company_information`:
+
+| id  | tenant_id | company_name | top_management | address_street | address_zip | address_town | created_at | updated_at |
+| --- | --------- | ------------ | -------------- | -------------- | ----------- | ------------ | ---------- | ---------- |
+|     |           |              |                |                |             |              |            |            |
+
+`company_authorized_representative`:
+
+| id  | tenant_id | title | first_name | last_name | phone | email | address_street | address_zip | address_town |  created_at | updated_at |
+| --- | --------- | ----- | ---------- | --------- | ----- | ----- | -------------- | ----------- | ------------ | ----------- | ---------- |
+|     |           |       |            |           |       |       |                |             |              |             |            |            
+
+`company_representive_eu`:
+
+| id  | tenant_id | company_name | title | first_name | last_name | address_street | address_zip | address_town | phone | email | created_at | updated_at |
+| --- | --------- | ------------ | ----- | ---------- | --------- | -------------- | ----------- | ------------ | ----- | ----- | ---------- | ---------- |
+|     |           |              |       |            |           |                |             |              |       |       |            |            |
+    
+`company_data_protection_officer`:
+
+| id  | tenant_id | title | first_name | last_name | phone | email | address_street | address_zip | address_town | created_at | updated_at |
+| --- | --------- | ----- | ---------- | --------- | ----- | ----- | -------------- | ----------- | ------------ | ---------- | ---------- |
+|     |           |       |            |           |       |       |                |             |              |            |            |
+  
+`company_supervisory_authority`:
+
+| id  | tenant_id | company_name | address_street | address_zip | address_town | phone | email | check | created_at | updated_at |
+| --- | --------- | ------------ | -------------- | ----------- | ------------ | ----- | ----- | ----- | ---------- | ---------- | 
+|     |           |              |                |             |              |       |       |       |            |            |
+
+`company_data_third_countries`:
+
+`company_top_management`:
+
+`company_settings_category`:
 
 ### Modified Files
 
@@ -30,46 +91,90 @@
             └── /
                 └── .php  
 ```
-
 ### Solution
 
-- Main Page mit Nav `company.blade.php`
-- jewilige Subpage wird über dieses tag eingebunden:
+#### Routes and Navigation
 
+1. `app/Http/Livewire/Company/MasterRecords.php` erstellen
+2. `resources/views/livewire/company/master-records.blade.php` erstellen
+3. `web.php`: 
+
+`Route::get('/', App\Http\Livewire\Company\Information::class)->name('information');` -> `Route::get('/', App\Http\Livewire\Company\MasterRecords::class)->name('master-records');`
+
+`Route::get('/verantwortlicher', App\Http\Livewire\Company\MasterRecords\Verantwortlicher::class)->name('verantwortlicher');` -> `Route::get('/information', App\Http\Livewire\Company\MasterRecords\Information::class)->name('information');`
+
+4. `MasterRecords.php`: namespace ändern: 
+
+`namespace App\Http\Livewire\Company;`
+
+5. `Information.php`: 
+
+- Namespace ändern:
+`namespace App\Http\Livewire\Company\MasterRecords;`
+
+- View Route ändern:
 ```php
-<div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
-    {{ $slot }}
-</div>
-```
-- in `$slot` variable steckt jeweilige form/page
-- In router wird mit der Middelware auf der base `/` route für company der Livewire Component Information mitgegeben welcher in der View und `$slot` eingefügt wird:
-  
-```php
-Route::middleware(['role:manager'])->prefix('company')->name('company.')->group(function () {
-    Route::get('/', App\Http\Livewire\Company\Information::class)->name('information');
+public function render(): View
+{
+    return view('livewire.company.master-records.information')
+        ->layout('layouts.settings.company', ['title' => __('company.general.title')]);
 }
 ```
 
-- neue route für master-records-combined zu company prefix hinzufügen und zu `/` route machen
-- `/informations` route aus master records prefix entfernen und als normale company prefiy route
-- 
-- neuen livewire component für master-records-combined erstellen
-- neue view für master-records-combined
+6. `resources/views/components/nav/collections/user-dropdown.blade.php`: Landing Route ändern: 
+
+```php
+@hasRole('manager')
+    <x-nav.links.dropdown route="company.master-records" :mobile="$mobile"
+        icon="briefcase">{{ __('Company Settings') }}</x-nav.links.dropdown>
+@endhasRole
+
+```
+
+7. `app/Http/Livewire/Company/MasterRecords.php`: title und layout hinzufügen:
+
+```php
+public function render()
+{
+    return view('livewire.company.master-records')
+        ->layout('layouts.settings.company', ['title' => __('company.master_records')]);
+}
+```
+
+8. `resources/views/layouts/settings/company.blade.php`:
+
+`<x-nav.links.settings route="company.information" icon="adjustments">{{ __('company.general.title') }}</x-nav.links.settings>` -> `<x-nav.links.settings route="company.master-records" icon="adjustments">{{ __('company.master_records') }}</x-nav.links.settings>`
+
+- user nav zu mitarbeiter und abteilungen
+- alle altern master records navs löschen
+
+9. `resources/views/livewire/company/master-records.blade.php`: 
+
+- Livewire Komponenten der Subkategorien als Collabsible einfügen:
+
+10. `gesetzlicher-vertreter.blade.php`:
+
+- Vertreter Route -> Information Route
+
+11. `datenschutzbeauftragter.blade.php`:
+
+- Vertreter Route -> Information Route
+
+#### Datenbank
 
 
-- `Information.php` in `Verantwortlichkeiten` reinmergen
-- Logo Upload in Verantwortlichkeiten View reinmergen
-- Main Nav Link zu Firmeneinstellung von Informations zu Master Records
-- Alte Master Record Nav Elemente aus `company.view.php` rausnehmen und neue Master Records Main Page verlinken
-  
-- in view können bereits erstellte views für einzelne punkte mit @livewire alle auf einer page eingebunden werden
-- collapsible für jeden Unterpunkt erstellen 
-- Dropdown Button einfügen, Titel in Header Slot einfügen 
-- Livewire in Content Slot einfügen
-- paddings und margins anpassen für optik
-- 
 
+1. 
 
+<!-- TODO -->
+<!-- 
+- master-records.blade.php Schleife einbauen, nachdem Category Table angelegt wurde
+- Verantwortlicher Ressourcen löschen, nachdem diese in Information eingebunden wurden
+- gesetzlicher-vertreter.blade.php verantwortlicher.title anpassen
+- datenschutzbeauftragter.blade.php verantwortlicher.title anpassen
+- masterrecords view action bar einfügen
+- Dokumenantation
+-->
 ### Result
 
 ## Task 2 Benutzer

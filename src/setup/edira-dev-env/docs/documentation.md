@@ -126,3 +126,19 @@ After everything is setup correctly you can open the appliction in your browser 
 
 `edira.docker.de`
 
+## 7. Setting up local Quality Check
+
+To setup an alias for your terminal to automatically run all `prettier`, `pint` and `larastan` checks, either go to your `.zshrc` or `.bshrv` and add:
+
+```bash
+alias prepare-commit='npx prettier --write ./**/*.blade.php && ./vendor/bin/pint && larastan && npm audit && composer audit'
+alias larastan='vendor/bin/phpstan analyse --memory-limit=-1'
+```
+
+After adding this restart your Terminal.
+
+Now you can run this command inside your local Edira project to automatically check all files:
+
+```bash
+prepare-commit
+```

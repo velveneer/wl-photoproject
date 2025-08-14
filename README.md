@@ -73,28 +73,32 @@ With the following steps you can run the MkDocs locally.
 Ensure Python and pip are installed on your system:
 
 ```bash
-python3 --version
-pip3 --version
+python --version
+pip --version
 ```
 
 If Python is not installed on your machine follow the official instructions for your system.
 
-#### Install MdDocs With Plugins on Manjaro
+#### Install MKDocs With Plugins
 
-I use MkDocs for a GUI interface to read the documentation for this project. Use these commands to install it:
+To install mkdocs and the required plugins for this project run:
 
 ```bash
-pipx install mkdocs
-pipx inject mkdocs mkdocs-material mkdocs-awesome-pages-plugin
+pip install mkdocs mkdocs-simple-blog mkdocs-search mkdocs-awesome-pages-plugin pymdown-extensions mkdocs-github-admonitions-plugin
 ```
 
 ### Running MkDocs on an Arch Distribution
 
+While installing pip for the first time, you will encounter the error: externally-managed-environment. You are getting this error because Arch Linux has a different way of managing Python packages than other Linux distributions. Arch Linux uses Pacman as its package manager, which installs Python packages system-wide and ensures that they are compatible with the rest of the system.
+
+To resolve this error, remove the EXTERNALLY-MANAGED file. To remove this file, run:
+
 ```bash
-sudo pacman -S python-pipx
-pipx install mkdocs
-pipx inject mkdocs mkdocs-material mkdocs-awesome-pages-plugin
+sudo rm -rf /usr/lib/pythonX.XX/EXTERNALLY-MANAGED
 ```
+
+Then run the commands to install for MkDocs from above.
+I use MkDocs for a GUI interface to read the documentation for this project. Use these commands to install it:
 
 #### Serving Documentation Locally
 

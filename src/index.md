@@ -88,7 +88,7 @@ If Python is not installed on your machine follow the official instructions for 
 To install mkdocs and the required plugins for this project run:
 
 ```bash
-pip install mkdocs mkdocs-simple-blog mkdocs-search mkdocs-awesome-pages-plugin pymdown-extensions mkdocs-github-admonitions-plugin
+pip install mkdocs mkdocs-simple-blog mkdocs-awesome-pages-plugin pymdown-extensions mkdocs-github-admonitions-plugin
 ```
 
 ### Running MkDocs on an Arch Distribution

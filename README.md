@@ -4,9 +4,11 @@ This repository contains the documentation for all my work I did at ETES.
 
 Right now it's split between:
 
-- `Edira`: documentation for the issues I worked on in Edira
-- `Education`: documenation for the online courses I did to prepare myself for my work at ETES
-- `Setup`: documentation for the setups that are used in the company
+**`Edira`**: documentation for the issues I worked on in Edira
+
+**`Education`**: documenation for the online courses I did to prepare myself for my work at ETES
+
+**`Setup`**: documentation for the setups that are used in the company
 
 The provided documentation is a MkDocs Collection that is hosted in a GitLab repository with a CI/CD pipeline as a GitLab Page to offer a better GUI.
 ---
@@ -56,57 +58,56 @@ If you want to run it locally on your machine follow the instructions down below
 └── README.md                   # Repository overview & setup instructions
 ```
 
-## Getting Started
-
-### Clone This Repository
-
-    ```bash
-    git clone https://git.etes.de/jroedel-work/work-documentation.git
-
-    cd work-documentation
-    ```
+## **Getting Started**
 
 ### Running MkDocs Locally on a Non-Arch Distribution
 
 With the following steps you can run the MkDocs locally.
 
-#### Install Python 
+**1. Clone This Repository**
 
-Ensure Python and pip are installed on your system:
+```bash
+git clone https://git.etes.de/jroedel-work/work-documentation.git
 
-    ```bash
-    python --version
-    pip --version
-    ```
+cd work-documentation
+```
+**2. Install Python**
 
-If Python is not installed on your machine follow the official instructions for your system.
+Ensure Python and pip are installed on your system. If Python is not installed on your machine follow the official instructions for your system.
 
-#### Install MKDocs With Plugins
+```bash
+python --version
+pip --version
+```
+
+**3. Install MKDocs With Plugins**
 
 To install mkdocs and the required plugins for this project run:
 
-    ```bash
-    pip install mkdocs mkdocs-simple-blog
-    ```
+```bash
+pip install mkdocs mkdocs-simple-blog
+```
+
+---
 
 ### Running MkDocs on an Arch Distribution
 
 While installing pip for the first time, you will encounter the error: externally-managed-environment. You are getting this error because Arch Linux has a different way of managing Python packages than other Linux distributions. Arch Linux uses Pacman as its package manager, which installs Python packages system-wide and ensures that they are compatible with the rest of the system.
 
-To resolve this error, remove the EXTERNALLY-MANAGED file. To remove this file, run:
+To resolve this error, remove the `EXTERNALLY-MANAGED` file. To remove this file, run:
 
-    ```bash
-    sudo rm -rf /usr/lib/pythonX.XX/EXTERNALLY-MANAGED
-    ```
+```bash
+sudo rm -rf /usr/lib/pythonX.XX/EXTERNALLY-MANAGED
+```
 
 Then run the commands to install for MkDocs from above.
 I use MkDocs for a GUI interface to read the documentation for this project. Use these commands to install it:
 
-#### Serving Documentation Locally
+### Serving Documentation Locally
 
-    ```bash
-    mkdocs serve
-    ```
+```bash
+mkdocs serve
+```
 
 The documentation will be available at:
 
@@ -116,45 +117,43 @@ The documentation will be available at:
 
 This MkDocs Documenation uses [Fernando Celmers MkDocs Theme](https://github.com/FernandoCelmer/mkdocs-simple-blog). 
 
-I've made some customizations inside the `mkdocs_simple_blog/` folder to fit the needs of this documentation.
+I've made some customizations inside the `mkdocs_simple_blog/` folder to fit the needs of this documentation. If you want to do this yourself follow these steps:
 
-If you want to do this yourself follow these steps:
-
-1. Create your virtual environment:
+**1. Create your virtual environment**
    
-   ```bash
-   python -m venv venv
-   ```
+```bash
+python -m venv venv
+```
 
-2. Activate the virtual environment:
+**2. Activate the virtual environment**
    
-   ```bash
-   source venv/bin/activate
-   ```
+```bash
+source venv/bin/activate
+```
 
-3. Install the necessary requirements to be able to test the application:
+**3. Install the necessary requirements to be able to test the application**
    
-   ```bash
-   pip install -r requirements.txt --no-cache-dir
-   ```
+```bash
+pip install -r requirements.txt --no-cache-dir
+```
 
-4. Make your changes as desired in the ./mkdocs_simple_blog folder:
+**4. Make your changes as desired in the ./mkdocs_simple_blog folder**
    
-   ```bash
-   ls mkdocs_simple_blog
-   ```
+```bash
+ls mkdocs_simple_blog
+```
 
-5. Run the script that creates and installs the local package to build your new theme:
-   
-   ```bash
-   python scripts/install_local.py
-   ```
+**5. Run the script that creates and installs the local package to build your new theme**
 
-6. Run your MkDocs site:
-   
-   ```bash
-   mkdocs serve
-   ```
+```bash
+python scripts/install_local.py 
+```
+
+**6. Run your MkDocs site**
+
+```bash
+mkdocs serve
+```
 
 ## Contribution 
 

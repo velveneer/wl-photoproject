@@ -18,6 +18,14 @@ theme:
 
 docs_dir: src
 
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+extra_css:
+  - stylesheets/extra.css
+
 nav:
   - Home: index.md
   - Edira:

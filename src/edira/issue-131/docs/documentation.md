@@ -1,8 +1,6 @@
 # Issue 131
 
-## Tasks
-
-### Task 1
+## Task
 
 Aktuell ist der Filter, wie viele VVTs im Index angezeigt werden, auf maximal 50 limitiert. Hier soll dieser Filter um 100 und alle erweitert werden.
 
@@ -25,11 +23,13 @@ Aktuell ist der Filter, wie viele VVTs im Index angezeigt werden, auf maximal 50
        
 ```
 
+---
+
 ## Solution
 
 Dass Dropdown Menu kann direkt in `index.blade.php` um die gewünschten Punkte erweitert werden:
 
-```
+```html
 <x-input.group borderless paddingless for="perPage" label="{{ __('datatable.labels.per_page') }}">
     <x-input.select wire:model.live="perPage" id="perPage">
         <option value="10">10</option>

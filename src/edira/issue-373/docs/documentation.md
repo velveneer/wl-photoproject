@@ -11,7 +11,7 @@ In diesem Issue werden weitreichenden Änderungen für die `Firmen-Einstellungen
 5. Mitarbeiter 
 6. Abteilungen
 
-## Task 1 Stammdaten
+## Task 1 Master Records
 
 ### Breakdown
 
@@ -21,15 +21,16 @@ Zudem soll die aktuell vorhandene Kategorie `Firmeninformationen` mit der Unterk
 
 ```
 Stammdaten
-2FA
-Sprache
----
-Schadenswerte
-Eintrittswahrscheinlichkeiten
 ---
 User
 Mitarbeiter
 Abteilungen
+---
+Schadenswerte
+Eintrittswahrscheinlichkeiten
+---
+2FA
+Sprache
 ```
 
 ![Redundante Einstellungen](../src/img/1.png)
@@ -200,6 +201,14 @@ Hier soll für jede Unterkategorie einen eigenenr Table angelegt werden:
         });
     }
     ```
+
+    Result:
+    
+    `company_information`:
+
+    | id  | tenant_id | company_name | top_management | address_street | address_zip | address_town | created_at | updated_at |
+    | --- | --------- | ------------ | -------------- | -------------- | ----------- | ------------ | ---------- | ---------- |
+    |     |           |              |                |                |             |              |            |            |
 
 #### Firmeninformationen
 
@@ -489,6 +498,39 @@ Hier soll für jede Unterkategorie einen eigenenr Table angelegt werden:
     {
         return $this->hasMany(CompanyAuthorizedRepresentative::class)->withoutGlobalScope(TenantScope::class);
     }
+    ```
+
+#### EU Representative
+
+1. `EuRepresentative.php` Make Livewire Component with View:
+
+    ```bash
+    php artisan make:livewire Company/MasterRecords/EuRepresentative
+    ```
+2. `CompanyEuRepresentative.php` Make Eloquent Model:
+
+    ```bash
+    php artisan make:model Company/MasterRecords/CompanyEuRepresentative
+    ```
+3. `2021_02_08_153929_create_master_records_table.php` Create DB Schema:
+
+    ```php
+    Schema::create('company_eu_representative', function (Blueprint $table) {
+        $table->id();
+        $table->unsignedBigInteger('tenant_id');
+        $table->string('company_name')->index();
+        $table->string('title')->index();
+        $table->string('first_name')->index();
+        $table->string('last_name')->index();
+        $table->string('phone')->index();
+        $table->string('email')->index();
+        $table->string('address_street')->index();
+        $table->string('address_zip')->index();
+        $table->string('address_town')->index();
+        $table->timestamps();
+
+        $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
+    });
     ```
 
 <!-- TODO -->

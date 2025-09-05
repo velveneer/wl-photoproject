@@ -17,15 +17,6 @@ theme:
   site_name_style: overline
   theme_style: dark
 
-markdown_extensions:
-  - pymdownx.details
-  - pymdownx.superfences
-  - admonition
-
-plugins:
-  - search
-  - awesome-pages
-
 docs_dir: src
 
 nav:

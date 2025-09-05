@@ -41,12 +41,6 @@ Im gleichen Zug soll die Datenbank angepasst werden. Aktuell werden alle Stammda
 
 Hier soll für jede Unterkategorie einen eigenenr Table angelegt werden:
 
-`company_information`:
-
-| id  | tenant_id | company_name | top_management | address_street | address_zip | address_town | created_at | updated_at |
-| --- | --------- | ------------ | -------------- | -------------- | ----------- | ------------ | ---------- | ---------- |
-|     |           |              |                |                |             |              |            |            |
-
 `company_authorized_representative`:
 
 | id  | tenant_id | title | first_name | last_name | phone | email | address_street | address_zip | address_town |  created_at | updated_at |

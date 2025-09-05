@@ -21,11 +21,11 @@
             {% endif %}
 
             {%- if config.theme.highlightjs %}
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-                <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/base16/grayscale-dark.min.css">
+                <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/styles/default.min.css">
+                <script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
 
                 {%- for lang in config.hljs_languages %}
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/{{lang}}.min.js"></script>
+                <script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/languages/go.min.js"></script>
                 {%- endfor %}
                 <script>hljs.highlightAll();</script>
             {%- endif %}

@@ -29,7 +29,7 @@ Aktuell ist der Filter, wie viele VVTs im Index angezeigt werden, auf maximal 50
 
 Dass Dropdown Menu kann direkt in `index.blade.php` um die gewünschten Punkte erweitert werden:
 
-```php
+```
 <x-input.group borderless paddingless for="perPage" label="{{ __('datatable.labels.per_page') }}">
     <x-input.select wire:model.live="perPage" id="perPage">
         <option value="10">10</option>

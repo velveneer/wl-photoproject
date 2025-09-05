@@ -3,7 +3,6 @@ site_name: JR-ETES-DOCS
 theme:
   name: simple-blog
   highlightjs: true
-  hljs_languages:
     - yaml
     - bash
     - php

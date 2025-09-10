@@ -46,6 +46,8 @@ nav:
           - 03 Master Records Rework Authorized Representatives: edira/issue-373/docs/mr/03-mr-authorized-representative/documentation.md
           - 04 Master Records Rework EU Representative: edira/issue-373/docs/mr/04-mr-eu-representative/documentation.md
           - 05 Master Records Rework Data Security Officer: edira/issue-373/docs/mr/05-mr-data-security-officer/documentation.md
+          - 06 Master Records Rework Respinsible Supervisory Authority: edira/issue-373/docs/mr/06-mr-responsible-supervisory-authority/documentation.md
+          - 07 Master Records Rework Situations Regarding Transfers to Third Countries: edira/issue-373/docs/mr/07-mr-data-third-country/documentation.md
       - 382 VVT Kapitel: edira/issue-382/docs/documentation.md
       - 383 VVT Overview Content Preview: edira/issue-383/docs/documentation.md
   - Setup:

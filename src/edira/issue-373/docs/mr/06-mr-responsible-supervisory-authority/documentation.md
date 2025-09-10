@@ -20,18 +20,17 @@ php artisan make:model MasterRecords/CompanyResponsibleSupervisoryAuthority
 **3. `2021_02_08_153929_create_master_records_table.php` Create DB Schema**
 
 ```php
-Schema::create('company_data_protection_officer', function (Blueprint $table) {
+Schema::create('company_responsible_supervisory_authority', function (Blueprint $table) {
     $table->id();
     $table->unsignedBigInteger('tenant_id');
-    $table->string('first_name')->index();
-    $table->string('last_name')->index();
+    $table->string('company_name')->index();
+    $table->string('address_street')->index();
+    $table->string('address_zip')->index();
+    $table->string('address_city')->index();
     $table->string('phone')->index();
     $table->string('email')->index();
-    $table->boolean('address_different')->index()->default(false);
-    $table->string('company_name')->index()->nullable();
-    $table->string('address_street')->index()->nullable();
-    $table->string('address_zip')->index()->nullable();
-    $table->string('address_city')->index()->nullable();
+    $table->string('website')->index();
+    $table->boolean('question')->nullable();
     $table->timestamps();
 
     $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
@@ -78,34 +77,33 @@ Schema::create('company_data_protection_officer', function (Blueprint $table) {
 
 ---
 
-**6. `data-protection-officer.blade.php`**
+**6. `responsible-supervisory-authority.blade.php`**
 
 View Elemente hinzufügen
 
 ---
 
-**7. `CompanyEuRepresentative.php`**
+**7. `CompanyResponsibleSupervisoryAuthority.php`**
 
 Model erstellen
 
 ```php
-class CompanyDataProtectionOfficer extends Model
+class CompanyResponsibleSupervisoryAuthority extends Model
 {
     use BelongsToTenant;
     use HasFactory;
 
-    protected $table = 'company_data_protection_officer';
+    protected $table = 'company_responsible_supervisory_authority';
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'phone',
-        'email',
-        'address_different',
         'company_name',
         'address_street',
         'address_zip',
         'address_city',
+        'phone',
+        'email',
+        'website',
+        'question',
     ];
 }
 ```
@@ -116,44 +114,43 @@ class CompanyDataProtectionOfficer extends Model
 
 ```php
 /**
- * @return HasMany<CompanyDataProtectionOfficer, $this>
+ * @return HasMany<CompanyResponsibleSupervisoryAuthority, $this>
  */
-public function dataprotectionofficer(): HasMany
+public function responsiblesupervisoryauthority(): HasMany
 {
-    return $this->hasMany(CompanyDataProtectionOfficer::class)->withoutGlobalScope(TenantScope::class);
+    return $this->hasMany(CompanyResponsibleSupervisoryAuthority::class)->withoutGlobalScope(TenantScope::class);
 }
 ```
 
 ---
 
-**9. `DataProtectionOfficer.php`**
+**9. `ResponsibleSupervisoryAuthority.php`**
 
 Variables and Rules:
 
 ```php
 public Tenant $tenant;
-public string $first_name;
-public string $last_name;
-public string $phone;
-public string $email;
-public bool $address_different = true;
 public string $company_name;
 public string $address_street;
 public string $address_zip;
 public string $address_city;
+public string $phone;
+public string $email;
+public string $website;
+public string $question;
 
 /**
  * @var array<string,array<mixed>>
  */
 protected $rules = [
-    'first_name' => ['required', 'max:255'],
-    'last_name' => ['required', 'max:255'],
+    'company_name' => ['required', 'max:255'],
+    'address_street' => ['required', 'max:255'],
+    'address_zip' => ['required', 'email', 'max:255'],
+    'address_city' => ['required', 'max:255'],
     'phone' => ['required', 'max:255'],
     'email' => ['required', 'email', 'max:255'],
-    'company_name' => ['sometimes', 'max:255'],
-    'address_street' => ['sometimes', 'max:255'],
-    'address_zip' => ['sometimes', 'max:255'],
-    'address_city' => ['sometimes', 'max:255'],
+    'website' => ['required'],
+    'question' => ['required', 'boolean'],
 ];
 ```
 
@@ -164,39 +161,23 @@ Before Render Function
 ```php
 public function mount(): void
 {
+
     if (auth()->user()?->tenant !== null) {
 
-        // get tenant values from user
+        /* Binds tenant to component and sets up the tenant name as a the company name in the view */
         $this->tenant = auth()->user()->tenant;
-        $this->company_name = $this->tenant->name;
 
-        // get values from database
-        $companyInfo = CompanyInformation::where('tenant_id', $this->tenant->id)->first();
-        $dataProtectionOfficer = CompanyDataProtectionOfficer::where('tenant_id', $this->tenant->id)->first();
-
+        /* Checks if the user already set up a record in the database and fills the form fields with the data to edit them */
         try {
-
-            // if available assign first name of responsible person from the 'company_information' table and store it in variables
-            $this->first_name = $companyInfo->responsible_person_first_name;
-            $this->last_name = $companyInfo->responsible_person_last_name;
-            $this->address_street = $companyInfo->address_street;
-            $this->address_zip = $companyInfo->address_zip;
-            $this->address_city = $companyInfo->address_city;
-
-            // if available assign values from 'company_data_protection_table' table and store it in variables
-            $this->first_name = $dataProtectionOfficer->first_name;
-            $this->last_name = $dataProtectionOfficer->last_name;
-            $this->phone = $dataProtectionOfficer->phone;
-            $this->email = $dataProtectionOfficer->email;
-
-            // when the address doesn't vary check if there is one in the 'company_information' table
-            if ($dataProtectionOfficer->address_different) {
-                $this->company_name = $dataProtectionOfficer->company_name;
-                $this->address_street = $dataProtectionOfficer->address_street;
-                $this->address_zip = $dataProtectionOfficer->address_zip;
-                $this->address_city = $dataProtectionOfficer->address_city;
-            }
-
+            $responsibleSupervisoryAuthority = CompanyResponsibleSupervisoryAuthority::where('tenant_id', $this->tenant->id)->first();
+            $this->company_name = $responsibleSupervisoryAuthority->company_name;
+            $this->address_street = $responsibleSupervisoryAuthority->address_street;
+            $this->address_zip = $responsibleSupervisoryAuthority->address_zip;
+            $this->address_city = $responsibleSupervisoryAuthority->address_city;
+            $this->phone = $responsibleSupervisoryAuthority->phone;
+            $this->email = $responsibleSupervisoryAuthority->email;
+            $this->website = $responsibleSupervisoryAuthority->website;
+            $this->question = $responsibleSupervisoryAuthority->question;
         } catch (Exception $e) {
 
         }
@@ -218,24 +199,23 @@ public function save(): void
     $this->validate();
 
     /* first checks the relationships and then creates or updates the records in the database using the upsert() method */
-    $this->tenant->dataprotectionofficer()->upsert(
+    $this->tenant->responsiblesupervisoryauthority()->upsert(
         /* This array contains the data */
         [
             'tenant_id' => $this->tenant,
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'phone' => $this->phone,
-            'email' => $this->email,
-            'address_different' => $this->address_different,
             'company_name' => $this->company_name,
             'address_street' => $this->address_street,
             'address_zip' => $this->address_zip,
             'address_city' => $this->address_city,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'website' => $this->website,
+            'question' => $this->question,
         ],
         /* This array defines what the row is unique/identified with */
         ['tenant_id'],
         /* This array defines which columns get updated */
-        ['first_name', 'last_name', 'phone', 'email','address_different', 'company_name', 'address_street', 'address_zip', 'address_city']
+        ['company_name', 'address_street', 'address_zip', 'address_city', 'phone', 'email', 'website', 'question']
     );
 
     /* Shows success notification */

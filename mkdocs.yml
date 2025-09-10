@@ -38,8 +38,13 @@ nav:
       - 336 SOA Version Update: edira/issue-336/docs/02_documentation.md
       - 338 Admin Advanced Search Filter: edira/issue-338/docs/documentation.md
       - 373 Company Settings Rework: 
-        - 373 Master Records Rework:
-          - 373 Company Information: edira/issue-373/docs/documentation.md
+        - Overview:
+          - Issue 337 Overview: edira/issue-373/docs/overview/documentation.md
+        - Master Records Rework:
+          - 01 Master Records Rework Preparations: edira/issue-373/docs/mr/01-mr-preparations/documentation.md
+          - 02 Master Records Rework Company Information: edira/issue-373/docs/mr/02-mr-company-information/documentation.md
+          - 03 Master Records Rework Authorized Representatives: edira/issue-373/docs/mr/03-mr-authorized-representative/documentation.md
+          - 04 Master Records Rework EU Representative: edira/issue-373/docs/mr/04-mr-eu-representative/documentation.md
       - 382 VVT Kapitel: edira/issue-382/docs/documentation.md
       - 383 VVT Overview Content Preview: edira/issue-383/docs/documentation.md
   - Setup:

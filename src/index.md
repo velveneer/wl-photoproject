@@ -117,6 +117,8 @@ The documentation will be available at:
 
 [localhost:8000](http://127.0.0.1:8000)
 
+---
+
 ### Theme Customization
 
 This MkDocs Documenation uses [Fernando Celmers MkDocs Theme](https://github.com/FernandoCelmer/mkdocs-simple-blog). 
@@ -157,6 +159,30 @@ python scripts/install_local.py
 
 ```bash
 mkdocs serve
+```
+
+--- 
+
+### Setup Script
+
+Use the `setup.sh` script to run the neccessary commands to setup the local server.
+
+**1. Make the script executable**
+
+```bash
+chmod +x setup.sh
+```
+
+**2. Execute the script**
+
+```bash
+./setup.sh
+```
+
+or 
+
+```bash
+bash setup.sh
 ```
 
 ## Contribution 

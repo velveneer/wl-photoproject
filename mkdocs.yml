@@ -45,6 +45,7 @@ nav:
           - 02 Master Records Rework Company Information: edira/issue-373/docs/mr/02-mr-company-information/documentation.md
           - 03 Master Records Rework Authorized Representatives: edira/issue-373/docs/mr/03-mr-authorized-representative/documentation.md
           - 04 Master Records Rework EU Representative: edira/issue-373/docs/mr/04-mr-eu-representative/documentation.md
+          - 05 Master Records Rework Data Security Officer: edira/issue-373/docs/mr/05-mr-data-security-officer/documentation.md
       - 382 VVT Kapitel: edira/issue-382/docs/documentation.md
       - 383 VVT Overview Content Preview: edira/issue-383/docs/documentation.md
   - Setup:

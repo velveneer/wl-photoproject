@@ -24,4 +24,6 @@ In diesem Issue werden weitreichenden Änderungen für die `Firmen-Einstellungen
 - Bilingual 
 - getMasterRecord Funktion entfernen
 - button authorized representative zu same as company information
+- table preview einfügen
+- 
 -->

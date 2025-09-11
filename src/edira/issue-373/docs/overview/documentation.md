@@ -14,16 +14,14 @@ In diesem Issue werden weitreichenden Änderungen für die `Firmen-Einstellungen
 <!-- TODO -->
 <!-- 
 - master-records.blade.php Schleife einbauen, nachdem Category Table angelegt wurde
-- Verantwortlicher Ressourcen löschen, nachdem diese in Information eingebunden wurden
-- gesetzlicher-vertreter.blade.php verantwortlicher.title anpassen
-- datenschutzbeauftragter.blade.php verantwortlicher.title anpassen
 - masterrecords view action bar einfügen
-- Dokumenantation
 - master-records table aus migration löschen
-- alte Oberstes Organ Files löschen
-- Bilingual 
 - getMasterRecord Funktion entfernen
 - button authorized representative zu same as company information
-- table preview einfügen
+- new seeder
 - 
 -->
+
+
+
+   

@@ -27,9 +27,9 @@ public function up()
     ```
     `company_information`:
 
-    | id  | tenant_id | company_name | top_management | address_street | address_zip | address_town | created_at | updated_at |
-    | --- | --------- | ------------ | -------------- | -------------- | ----------- | ------------ | ---------- | ---------- |
-    |     |           |              |                |                |             |              |            |            |
+    | id  | tenant_id | company_name | top_management | address_street | address_zip | address_town | responsible_person_first_name | responsible_person_last_name | created_at | updated_at | 
+| --- | --------- | ------------ | -------------- | -------------- | ----------- | ------------ | ---------- | ---------- | ---------- | ---------- |
+|     |           |              |                |                |             |              |            |            |            |            |
     ```
 
 ---

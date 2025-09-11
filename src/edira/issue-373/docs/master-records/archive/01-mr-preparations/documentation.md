@@ -41,57 +41,49 @@ Hier soll für jede Unterkategorie einen eigenenr Table angelegt werden:
 
 `company_information`:
 
-| id  | tenant_id | company_name | top_management | address_street | address_zip | address_town | created_at | updated_at |
-| --- | --------- | ------------ | -------------- | -------------- | ----------- | ------------ | ---------- | ---------- |
-|     |           |              |                |                |             |              |            |            |
+| id  | tenant_id | first_name | last_name | phone | email | address_different | address_street | address_zip | address_town | created_at | updated_at |
+| | | | | | | | | | | | |
+| | | | | | | | | | | | |
 
 ---
 
 `company_authorized_representative`:
 
-| id  | tenant_id | title | first_name | last_name | phone | email | address_street | address_zip | address_town |  created_at | updated_at |
-| --- | --------- | ----- | ---------- | --------- | ----- | ----- | -------------- | ----------- | ------------ | ----------- | ---------- |
-|     |           |       |            |           |       |       |                |             |              |             |            |            
+| id  | tenant_id | first_name | last_name | phone | email | address_different | address_street | address_zip | address_town | created_at | updated_at |
+| | | | | | | | | | | | |
+| | | | | | | | | | | | |          
 
 ---
 
 `company_representive_eu`:
 
-| id  | tenant_id | company_name | title | first_name | last_name | address_street | address_zip | address_town | phone | email | created_at | updated_at |
-| --- | --------- | ------------ | ----- | ---------- | --------- | -------------- | ----------- | ------------ | ----- | ----- | ---------- | ---------- |
-|     |           |              |       |            |           |                |             |              |       |       |            |            |
+| id  | tenant_id | company_name | first_name | last_name | phone | email | address_street | address_zip | address_town | created_at | updated_at |
+| | | | | | | | | | | | |
+| | | | | | | | | | | | |
 
 ---
 
 `company_data_protection_officer`:
 
-| id  | tenant_id | title | first_name | last_name | phone | email | company_name | address_street | address_zip | address_town | created_at | updated_at |
-| --- | --------- | ----- | ---------- | --------- | ----- | ----- | ------------ | -------------- | ----------- | ------------ | ---------- | ---------- |
-|     |           |       |            |           |       |       |              |                |             |              |            |            |
+| id  | tenant_id | first_name | last_name | phone | address_different | email | company_name | address_street | address_zip | address_town | created_at | updated_at |
+| | | | | | | | | | | | | |
+| | | | | | | | | | | | | |
 
 --- 
 
 `company_supervisory_authority`:
 
-| id  | tenant_id | company_name | address_street | address_zip | address_town | phone | email | dpo_notified | created_at | updated_at |
-| --- | --------- | ------------ | -------------- | ----------- | ------------ | ----- | ----- | ----- | ---------- | ---------- | 
-|     |           |              |                |             |              |       |       |       |            |            |
+| id  | tenant_id | company_name | address_street | address_zip | address_town | phone | email | website | question | created_at | updated_at |
+| | | | | | | | | | | | | 
+| | | | | | | | | | | | | 
 
 ---
 
 `company_data_third_countries`:
 
-| id  | tenant_id | data_transferred | created_at | updated_at |
-| --- | --------- | ---------------- | ---------- | ---------- |
-|     |           |                  |            |            |
-
----
-
-`company_settings_categories`:
-
-| id  | tenant_id | name | created_at | updated_at |
-| --- | --------- | ---- | ---------- | ---------- |
-|     |           |      |            |            |
+| id  | tenant_id |  question | created_at | updated_at |
+| | | | | |
+| | | | | | 
 
 ---
 

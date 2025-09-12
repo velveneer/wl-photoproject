@@ -14,7 +14,7 @@ theme:
   components:
     footer: false
   site_name_style: overline
-  theme_style: dark
+  theme_style: light
 
 docs_dir: src
 

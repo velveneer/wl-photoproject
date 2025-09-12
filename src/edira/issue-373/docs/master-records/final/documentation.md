@@ -212,7 +212,83 @@ Route::middleware(['role:manager'])->prefix('company')->name('company.')->group(
 
 --- 
 
-## 2.4 Gui Group Action Master Record Overview Page
+## 2.4 Master Record Overview Page
+
+### 2.4.1 Collapse Component
+
+The following steps where taken to make the master settings overview page dynamic and easier to use for group actions.
+
+---
+
+`app/Http/Livewire/Company/MasterRecords.php`
+
+```php
+public bool $open = true;
+
+public $categories = [
+    'general' => 'information',
+    'authorized_representative' => 'authorized-representative',
+    'eu_representative' => 'eu-representative',
+    'data_protection_officer' => 'data-protection-officer',
+    'responsible_supervisory_authority' => 'responsible-supervisory-authority',
+    'data_third_country' => 'data-third-country',
+];
+```
+
+!!! Note
+    This array $categories is used in the view to create an collapse element for each master record settings category with a for loop. 
+
+    The bool $open is used to define the render state of the collapse component.
+
+---
+
+`ressourves/views/components/collapse.blade.php`
+
+```php
+<div x-data="{ open: @entangle($attributes->wire('model')) ?? false }" {{ $attributes->class(['bg-white overflow-hidden rounded-lg mt-3'])->merge() }}>
+    <div>
+        // rest of the content
+    </div>
+</div>
+```
+
+!!! Note 
+    @entangle($attributes->wire('model')) is used to apply the value from the livewire compenent to the prop open.
+
+    If nothing is set in the livewire component the default vaulue is false.
+
+---
+
+```php
+<div>
+    @foreach ($categories as $category => $name)
+        <x-collapse :wire:key="'open-' . $category" wire:model="open-{{ $category }}">
+            <x-slot name="trigger" class="flex justify-between px-5 py-4 shadow">
+                <div class="flex">
+                    <div class="flex items-center pr-2">
+                        {{-- Language link is concatted with the key --}}
+                        <h2 class="px-2 font-semibold">{{ __('company.' . $category . '.title') }}</h2>
+                    </div>
+                </div>
+            </x-slot>
+
+            <x-slot name="content" class="divide-y-2 border-gray-400 p-2">
+                {{-- Livewire component link is concatted with the key --}}
+                @livewire('company.master-records.' . $name)
+            </x-slot>
+        </x-collapse>
+    @endforeach
+</div>
+```
+!!! Note
+    The key from the $categories array in the for loop is used for the bilingual identifier and the value is used for the livewire component link.
+
+    `wire:model="open-{{ $category }}"`: links the component variable with the x-data prop.
+    
+    `:wire:key="'open-' . $category"`: Each collapse instance gets a unique key to allow seperated @click functions with 
+
+---
+
 
 # 3. Solution
 

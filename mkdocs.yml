@@ -18,49 +18,13 @@ theme:
 
 docs_dir: src
 
-markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-
 extra_css:
   - stylesheets/extra.css
 
 nav:
   - Home: index.md
-  - Edira:
-    - VVTs:
-      - 131 VVT Admin Dashboard Show VVTs: edira/issue-131/docs/documentation.md
-      - 159 VVT Create Notification: edira/issue-159/docs/documentation.md
-      - 169 VVT Highlight After Creation: edira/issue-169/docs/documentation.md
-      - 382 VVT Kapitel: edira/issue-382/docs/documentation.md
-      - 383 VVT Overview Content Preview: edira/issue-383/docs/documentation.md
-    - Admin:
-      - 338 Admin Advanced Search Filter: edira/issue-338/docs/documentation.md
-    - SOA:
-      - 336 SOA Version Update: edira/issue-336/docs/02_documentation.md  
-    - Company Settings:
-        - Overview: edira/issue-373/docs/overview/documentation.md
-        - 373 Master Records Rework: edira/issue-373/docs/master-records/final/documentation.md
-        - Archive:
-          - 373 Master Records:
-            - 01 Master Records Preparations: edira/issue-373/docs/master-records/archive/01-mr-preparations/documentation.md
-            - 02 Master Records Rework Company Information: edira/issue-373/docs/master-records/archive/02-mr-company-information/documentation.md
-            - 03 Master Records Rework Authorized Representatives: edira/issue-373/docs/master-records/archive/03-mr-authorized-representative/documentation.md
-            - 04 Master Records Rework EU Representative: edira/issue-373/docs/master-records/archive/04-mr-eu-representative/documentation.md
-            - 05 Master Records Rework Data Security Officer: edira/issue-373/docs/master-records/archive/05-mr-data-security-officer/documentation.md
-            - 06 Master Records Rework Respinsible Supervisory Authority: edira/issue-373/docs/master-records/archive/06-mr-responsible-supervisory-authority/documentation.md
-            - 07 Master Records Rework Situations Regarding Transfers to Third Countries: edira/issue-373/docs/master-records/archive/07-mr-data-third-country/documentation.md
-  - Setup:
-    - Edira Development Setup: setup/edira-dev-env/docs/documentation.md
-    - Edira Git Guide: setup/git/docs/documentation.md
-    - Breakdowns:
-      - Directory Structure & Responsibilties: setup/project-breakdown/docs/structure.md
-  - Education:
-    - ETES Internal Courses:
-      - BD01: education/etes-edu/BD01/docs/documentation.md
-    - Laracast:
-      - Git: education/laracast/git/docs/documentation.md
-      - Laravel: education/laracast/laravel/docs/documentation.md
-      - Livewire: education/laracast/livewire/docs/documentation.md
-      - PHP: education/laracast/php/docs/documentation.md
+  - Page01:
+    - SubPage01:
+      - SubPage01: page01/docs/documentation.md
+  - Page02:
+    - Page02: Page02/docs/documentation.md

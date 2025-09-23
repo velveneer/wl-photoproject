@@ -1,41 +1,52 @@
-from pip import main
-from os import system
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import sys
+import subprocess
 from pathlib import Path
 from shutil import rmtree
 
-
 CONTEXT = Path.cwd()
 
+def sh(*args: str) -> None:
+    """Run a command and fail loud if it errors."""
+    subprocess.check_call(list(args))
+
+def pip_run(*pip_args: str) -> None:
+    """Run pip in the current interpreter/venv."""
+    sh(sys.executable, "-m", "pip", *pip_args)
 
 def install_package() -> None:
-    version = open(file="LAST_VERSION").read().replace("-", ".")
+    # Prefer reading version safely; or just pick the built artifact.
+    last_version_file = CONTEXT / "LAST_VERSION"
+    if last_version_file.exists():
+        version = last_version_file.read_text().strip().replace("-", ".")
+        dist_file = CONTEXT / "dist" / f"mkdocs_simple_blog-{version}.tar.gz"
+    else:
+        # fallback: first matching file
+        matches = sorted((CONTEXT / "dist").glob("mkdocs_simple_blog-*.tar.gz"))
+        if not matches:
+            raise FileNotFoundError("No built sdist found in ./dist")
+        dist_file = matches[-1]
 
-    main(["uninstall", "mkdocs-simple-blog", "-y"])
-    main(["install", f"dist/mkdocs_simple_blog-{version}.tar.gz", "--no-cache-dir"])
-
+    # Uninstall old then install new
+    pip_run("uninstall", "-y", "mkdocs-simple-blog")
+    pip_run("install", "--no-cache-dir", str(dist_file))
 
 def build_package() -> None:
-    system("python -m build")
-
+    sh(sys.executable, "-m", "build")
 
 def install_requirements() -> None:
-    main(["install", "--upgrade", "pip"])
-    main(["install", "build"])
-
+    pip_run("install", "--upgrade", "pip")
+    pip_run("install", "build")
 
 def remove_tree(path: Path) -> None:
-    rmtree(path=path)
-
+    if path.exists():
+        rmtree(path)
 
 if __name__ == "__main__":
-    _folders = [
-        CONTEXT.joinpath("dist"),
-        CONTEXT.joinpath("mkdocs_simple_blog.egg-info"),
-    ]
-
-    for folder in _folders:
-        if folder.exists():
-            remove_tree(path=folder)
+    for folder in (CONTEXT / "dist", CONTEXT / "mkdocs_simple_blog.egg-info"):
+        remove_tree(folder)
 
     install_requirements()
     build_package()

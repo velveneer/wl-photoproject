@@ -1,7 +1,8 @@
 site_name: JR-DOCS
 
 theme:
-  name: simple-blog
+  name: null
+  custom_dir: mkdocs_simple_blog
   highlightjs: true
     - yaml
     - bash
@@ -18,18 +19,16 @@ theme:
 
 docs_dir: src
 
+markdown_extensions:
+  - admonition
+
 extra_css:
   - stylesheets/extra.css
 
 nav:
   - Home: breakdown/docs/documentation.md
-  - Moodboard:
-    - Moodboard: moodboard/docs/documentation.md
-  - Location:
-    - Location: location/docs/documentation.md
-  - Equipment:
-    - Equipment: equipment/docs/documentation.md
-  - Costs:
-    - Costs: costs/docs/documentation.md
-  - Timetable:
-    - Timetable: timetable/docs/documentation.md
+  - Moodboard: moodboard/docs/documentation.md
+  - Location: location/docs/documentation.md
+  - Equipment: equipment/docs/documentation.md
+  - Costs: costs/docs/documentation.md
+  - Timetable: timetable/docs/documentation.md

@@ -36,9 +36,9 @@ The following steps setup everything needed to run the setup scripts.
 **1. Clone This Repository**
 
 ```bash
-git clone https://git.etes.de/jroedel-work/work-documentation.git
+git clone https://github.com/velveneer/mkdocs-sb-sceleton.git
 
-cd sceleton
+cd mkdocs-sb-sceleton
 ```
 
 **2. Install Python**

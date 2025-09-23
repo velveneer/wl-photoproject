@@ -1,24 +1,6 @@
-# Work Documentation Johannes Rödel
+# Sceleton MkDocs Project
 
-This website contains the documentation for all my work I did at ETES. 
-
-Right now it's split between:
-
-**`Edira`**: documentation for the issues I worked on in Edira
-
-**`Education`**: documenation for the online courses I did to prepare myself for my work at ETES
-
-**`Setup`**: documentation for the setups that are used in the company
-
-The provided documentation is a MkDocs Collection that is hosted in a GitLab repository with a CI/CD pipeline as a GitLab Page to offer a better GUI.
-
----
-
-## [Link GitLab Source Repository](https://git.etes.de/jroedel-work/work-documentation.git)
-
-The documentation supports a search function to quickly search for specific words.
-
-If you want to run it locally on your machine follow the instructions down below. 
+This repository contains a sceleton project structure that allows you to costumize the theme of the simple-blog fork for mkdocs. 
 
 ---
 
@@ -29,52 +11,38 @@ If you want to run it locally on your machine follow the instructions down below
 ├── mkdocs_simple_blog/         # Simple-blog src files for customization
 ├── scripts/                    # Simple-blog script files to update template after changes
 ├── src/                        # All documentation files
-│   ├── setup/                  # Instructions setup needed tools for ETES
-│   │   ├── edira-dev-env/      # Edira development environment setup
-│   │   │   ├── docs/           # .md documentation files
-│   │   │   └── src             # Other files
-│   │   ├── .../                # Additional setup guides
-│   ├── edira/                  # Documentation for Edira and Issues
-│   │   ├── project-breakdown/  # Explanations like folder structure, laraval/livewire features, etc.
-│   │   │   ├── docs/           # .md documentation files
-│   │   │   └── src             # Other files
-│   │   ├── issue-XY/           # Specific issue
-│   │   │   ├── docs/           # .md documentation files
-│   │   │   └── src             # Other files
-│   │   ├── .../                # Additional issues
-│   ├── education/              # All educational course for preparations to work at ETES
-│   │   ├── etes-edu/           # All internal course made by ETES
-│   │   │   ├── BD-XY/          # Specific course
-│   │   │   │   ├── docs/       # .md documentation files
-│   │   │   │   └── src         # Source files from exercises
-│   │   │   ├── .../            # Additional internal courses
-│   │   ├── laracast/           # All laracast courses
-│   │   │   ├── laravel/        # Specific laravel course
-│   │   │   │   ├── docs/       # .md documentation files
-│   │   │   │   └── src         # Source files from the exercises  
-│   │   ├── .../                # Additional laracast courses
-│   ├── .../                    # Additional topics that will be implemented in the future        
+│   ├── page01/                 # Files for menu point 1
+│   │   ├── docs/               # .md documentation files
+│   │   └── src                 # Other files
+│   ├── page02/                 # Files for menu point 2
+│   │   ├── docs/               # .md documentation files
+│   │   └── src                 # Other files     
 │   └── index.md                # Home Page MkDocs 
 ├── .gitignore                  # Local files that don't get pushed to the remote repository
 ├── .gitlab-ci.yml              # CI pipeline to build GitLab Page for MkDocs
 ├── mkdocs.yml                  # MkDocs config
-└── README.md                   # Repository overview & setup instructions
+├── README.md                   # Repository overview & setup instructions
+├── requirements.txt            # Python packages that get installed by the setup.sh script
+├── setup.py                    # Python setup script
+└── setup.sh                    # Shell setup script
 ```
 
 ---
 
 ## **Getting Started**
 
-### Running MkDocs Locally on a Non-Arch Distribution
+### Setup
 
-With the following steps you can run the MkDocs locally.
+The following steps setup everything needed to run the setup scripts.
 
 **1. Clone This Repository**
 
 ```bash
-git clone https://git.etes.de/jroedel-work/work-documentation.git
-cd work-documentation
+git clone https://github.com/velveneer/mkdocs-sb-sceleton.git
+
+cd mkdocs-sb-sceleton
 ```
+
 **2. Install Python**
 
 Ensure Python and pip are installed on your system. If Python is not installed on your machine follow the official instructions for your system.
@@ -84,33 +52,38 @@ python --version
 pip --version
 ```
 
-**3. Install MKDocs With Plugins**
+**3. Activate Virtual Environment**
+
+```bash
+python3 -m venv .venv
+
+source .venv/bin/activate
+```
+
+If you're running into permission problems, check if your user has the correct permissions for this folder:
+
+```bash
+ls -ld .venv
+```
+
+If you're not seeing your user run:
+
+```bash
+deactivate 2>/dev/null || true
+
+sudo rm -rf .venv
+
+python -m venv .venv
+
+source .venv/bin/activate
+```
+
+**4. Running Setup Script**
 
 To install mkdocs and the required plugins for this project run:
 
 ```bash
-pip install mkdocs mkdocs-simple-blog
-```
-
----
-
-### Running MkDocs on an Arch Distribution
-
-While installing pip for the first time, you will encounter the error: externally-managed-environment. You are getting this error because Arch Linux has a different way of managing Python packages than other Linux distributions. Arch Linux uses Pacman as its package manager, which installs Python packages system-wide and ensures that they are compatible with the rest of the system.
-
-To resolve this error, remove the `EXTERNALLY-MANAGED` file. To remove this file, run:
-
-```bash
-sudo rm -rf /usr/lib/pythonX.XX/EXTERNALLY-MANAGED
-```
-
-Then run the commands to install for MkDocs from above.
-I use MkDocs for a GUI interface to read the documentation for this project. Use these commands to install it:
-
-### Serving Documentation Locally
-
-```bash
-mkdocs serve
+./setup.sh
 ```
 
 The documentation will be available at:
@@ -159,30 +132,6 @@ python scripts/install_local.py
 
 ```bash
 mkdocs serve
-```
-
---- 
-
-### Setup Script
-
-Use the `setup.sh` script to run the neccessary commands to setup the local server.
-
-**1. Make the script executable**
-
-```bash
-chmod +x setup.sh
-```
-
-**2. Execute the script**
-
-```bash
-./setup.sh
-```
-
-or 
-
-```bash
-bash setup.sh
 ```
 
 ## Contribution 

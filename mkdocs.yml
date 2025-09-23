@@ -1,4 +1,4 @@
-site_name: JR-ETES-DOCS
+site_name: JR-DOCS
 
 theme:
   name: simple-blog
@@ -22,9 +22,14 @@ extra_css:
   - stylesheets/extra.css
 
 nav:
-  - Home: index.md
-  - Page01:
-    - SubPage01:
-      - SubPage01: page01/docs/documentation.md
-  - Page02:
-    - Page02: Page02/docs/documentation.md
+  - Home: breakdown/docs/documentation.md
+  - Moodboard:
+    - Moodboard: moodboard/docs/documentation.md
+  - Location:
+    - Location: location/docs/documentation.md
+  - Equipment:
+    - Equipment: equipment/docs/documentation.md
+  - Costs:
+    - Costs: costs/docs/documentation.md
+  - Timetable:
+    - Timetable: timetable/docs/documentation.md

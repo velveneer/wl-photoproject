@@ -1,8 +1,8 @@
 # Create virtual environment and install dependencies
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt --no-cache-dir
+pip install mkdocs --no-cache-dir
+pip install dist/mkdocs_simple_blog-0.2.0.tar.gz --no-cache-dir
 
-# Run installation script and serve documentation
-python scripts/install_local.py 
+# Serve documentation
 mkdocs serve

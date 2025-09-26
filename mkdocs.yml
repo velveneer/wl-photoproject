@@ -1,8 +1,7 @@
 site_name: JR-DOCS
 
 theme:
-  name: null
-  custom_dir: mkdocs_simple_blog
+  name: simple-blog
   highlightjs: true
     - yaml
     - bash
